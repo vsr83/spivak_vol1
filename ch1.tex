@@ -1,0 +1,202 @@
+\documentclass [12pt, a4paper] {article}
+
+%Babel tekee kuulemma jotain typerää, joten seuraava on välttämätöntä.
+\usepackage[all, knot] {xy}
+\let\oldxy\xy\def\xy{\begingroup\catcode`\"12\oldxy}
+\let\oldendxy\endxy\def\endxy{\oldendxy\endgroup} 
+\xyoption {arc}
+\usepackage [latin1] {inputenc}
+\usepackage [T1] {fontenc}
+\usepackage [english] {babel}
+\usepackage [dvips] {graphicx}
+\usepackage {amsfonts}
+\usepackage {amssymb}
+\usepackage {amsmath}
+\usepackage {verbatim}
+\usepackage {fancyhdr}
+\usepackage {psfrag}
+\usepackage {listings}
+\usepackage {eso-pic}
+
+%\usepackage[urw-garamond]{mathdesign}
+\usepackage[small,bf]{caption}
+
+\newcommand{\BackgroundPic}{
+%  \put(0,0){
+%    \parbox[b][\paperheight]{\paperwidth}{
+%      \vfill
+%      \centering
+%      \includegraphics[width=\paperwidth, height=\paperheight, keepaspectratio%]{
+%kansilehti.ps}
+%    }
+%  }
+%  \textbf{SMG-5156 - Electromagnetic Modelling I}\\
+%  \textbf{Exercise 1 - Problem 4}\\
+%  \textbf{Ville Räisänen}
+%\end {flushleft}
+
+%  \put(42, 810){\textbf{SMG-5156 - Electromagnetic Modelling I}}
+%  \put(42, 797){\textbf{Exercise 1 - Problem 1}}
+%  \put(42, 784){\textbf{Ville Räisänen}}
+%  \put(445, 810){\textbf{Please, do not distribute!}}
+}
+
+\addtolength{\evensidemargin}{-1cm}
+\addtolength{\oddsidemargin}{-1cm}
+\addtolength{\marginparwidth}{-2.0cm}
+\addtolength{\topmargin}{-2cm}
+\addtolength{\textwidth}{3cm}
+\addtolength{\textheight}{2cm}
+\addtolength{\columnsep}{0.5cm}
+
+ 
+\lhead {Spivak Comprehensive Introduction to Differential Geometry vol. 1 \\Ville Räisänen}
+\rhead {\today}
+\thispagestyle{fancy}
+
+\newtheorem {problem} {Problem}
+\newtheorem {definition} {Definition}
+
+\newcommand{\vu}[1]
+{
+	\mathbf{\hat #1}
+}
+\newcommand{\vf}[1]
+{
+	\mathbf{\vec #1}
+}
+\newcommand{\mc}[1]
+{
+	\mathcal{#1}
+}
+\newcommand{\vc}[1]
+{
+	\boldsymbol{#1}
+}
+\newcommand{\vcc}[1]
+{
+	\widetilde{\boldsymbol{#1}}
+}
+\newcommand{\cc}[1]
+{
+	\widetilde{#1}
+}
+\newcommand{\sgn}
+{
+  \textrm{sgn}\:
+}
+\newcommand{\pdiff}[2]
+{
+	\frac{\partial #1}{\partial #2}
+}
+\newcommand{\diff}[2]
+{
+	\frac{d #1}{d #2}
+}
+\newcommand{\vali}
+{
+  \begin {displaymath}\:\end{displaymath}
+}
+\newcommand{\norm}[2]
+{
+  ||#1||_{#2}
+}
+
+\newcommand{\solution}
+{
+  \flushleft{\textbf{\textrm{Solution:}}}
+}
+\newcommand{\motivation}
+{
+  \flushleft{\textbf{\textrm{Motivation:}}}
+}
+
+\begin {document}
+
+\section{Chapter 1}
+
+\begin {definition}
+  A \textbf{metric} on a set $X$ is a function $d:X\times X\to\mathbb{R}$ with
+  the following properties for all $x, y, z\in X$:
+  \begin {eqnarray*}
+    &1:& d(x, y) \geq 0 \\
+   &2:& d(x, y) = 0 \Leftrightarrow x = y \\
+    &3:&  d(x, y) = d(y, x) \\
+   &4:& d(x, z) \leq d(x, y) + d(y, z).
+  \end {eqnarray*}
+  An \textbf{$\epsilon$-ball} centered at $x\in X$ in metric space $(X, d)$ is the set
+  \begin {eqnarray}
+    B_d(x, \epsilon) = \{y\in X : d(x, y) < \epsilon\}
+  \end {eqnarray}
+\end {definition}
+
+\flushleft{\textbf{\textrm{Lemma 13.1 (Munkres):}}} Left $X$ be a set; let $\mathcal B$ be
+a basis for a topology $\mathcal{T}$ on $X$. Then $\mathcal{T}$ equals the collection
+of all unions of elements of $\mathcal{B}$.
+
+\begin {definition}
+  If $d$ is a metric on the set $X$, then the collection of all $\epsilon$-balls
+  $B_d(x, \epsilon)$, for $x\in X$ and $\epsilon>0$, is a basis for a topology on $X$
+  called the \textbf{metric topology} induced by $d$.
+\end {definition}
+
+\hrule
+
+\begin {problem}
+  Show that if d is a metric on X, then both $\overline d = d/(1+d)$ and
+  $\overline d= \min(1,d)$ are also metrics and they are equivalent to d (i.e.., the identity
+  map $1:(X, d)\mapsto(X,\overline d)$ is a homeomorphism).
+\end {problem}
+
+\motivation{} On page 3, both definitions of
+$\overline d$ provide a way given a metric $d$ to define an equivalent
+(induces the same topology) metric bounded above by $1$. Metric bounded
+above by $1$ allows then definition of a metric for disjoint union of two
+metric spaces $(M_1, d_1)$ and $(M_2, d_2)$
+\begin {displaymath}
+  d(x,y) = \left\{
+  \begin {array}{ll}
+    \overline d_i(x,y) & \textrm{if there is some }i \textrm{such that }x,y\in M_i\\
+    1, & otherwise.
+  \end {array}
+  \right.
+\end {displaymath}
+\begin {solution}\end {solution}
+Let us first focus on the case $\overline d = d/(1+d)$:
+
+Let $x, y, z\in X$.
+Since $d$ is a metric $d(x, y) \geq 0$ and also $1 + d(x,y) \geq 0$. Therefore
+\begin {displaymath}
+  \overline d(x,y) = \dfrac{d(x,y)}{1+d(x,y)} \geq 0 \quad (1 : \textrm{non-negativity}).
+\end {displaymath}
+Let $\overline d(x,y)=0$. Then, since denominator is always non-zero, $d(x,y)=0$ must
+hold. Since $d$ is a metric $x=y$ must hold (2: identity). Since $d$ is symmetric, simple
+computation reveals
+\begin {eqnarray*}
+  \overline d(y, x) = \frac{d(y,x)}{1+d(y,x)} = \frac{d(x,y)}{1+d(x,y)}= \overline d(x,y) \quad ( 3: \textrm{symmetry}).
+\end {eqnarray*}
+To prove the triangle inequality, first note that if
+$d(x,y) \geq d(x,z)$ or $d(y,z) \geq d(x,z)$, then since $\overline d$ is increasing
+w.r.t. $d$, clearly 
+\begin {eqnarray*}
+  \overline d(x,z) \leq \overline d(x,y) + \overline d(y, z)
+\end {eqnarray*}
+holds. Suppose that $d(x, z) > d(x,y)$ and $d(x, z) > d(y, z)$. Application of this and
+the triangle inequality for $d$, yields
+\begin {eqnarray*}
+  \overline d(x, z) &=&
+  \frac{d(x, z)}{1 + d(x, z)} \\
+  &\leq&
+  \frac{d(x, y)}{1 + d(x, z)} + \frac{d(y, z)}{1 + d(x, z)} \\
+  &\leq&
+  \frac{d(x, y)}{1 + d(x, y)} + \frac{d(y, z)}{1 + d(y, z)} \\
+  &=& \overline d(x,y) + \overline d(y, z) \quad (4 : \textrm{triangle inequality}).
+\end {eqnarray*}
+Therefore, $\overline d$ is a metric. We need to now show that the metrics $d$ and $\overline d$
+are equivalent. That is, they must induce the same topology. If the identity map 
+$I: (X,d)\mapsto (X, \overline d)$ is a homeomorphism, $I^-1 U = U$ and $IV =V$ are open for
+any open $U\subseteq(X, \overline d)$ and $V\subseteq(X, d)$.
+
+
+
+\end {document}
