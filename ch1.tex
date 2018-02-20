@@ -104,11 +104,11 @@
 
 \newcommand{\solution}
 {
-  \flushleft{\textbf{\textrm{Solution:}}}
+   {\textbf{\textrm{Solution:}}}
 }
 \newcommand{\motivation}
 {
-  \flushleft{\textbf{\textrm{Motivation:}}}
+  {\textbf{\textrm{Motivation:}}}
 }
 
 \begin {document}
@@ -130,9 +130,11 @@
   \end {eqnarray}
 \end {definition}
 
-\flushleft{\textbf{\textrm{Lemma 13.1 (Munkres):}}} Left $X$ be a set; let $\mathcal B$ be
+\begin {flushleft}
+\textbf{\textrm{Lemma 13.1 (Munkres):}} Left $X$ be a set; let $\mathcal B$ be
 a basis for a topology $\mathcal{T}$ on $X$. Then $\mathcal{T}$ equals the collection
 of all unions of elements of $\mathcal{B}$.
+\end {flushleft}
 
 \begin {definition}
   If $d$ is a metric on the set $X$, then the collection of all $\epsilon$-balls
@@ -145,9 +147,8 @@ of all unions of elements of $\mathcal{B}$.
 \begin {problem}
   Show that if d is a metric on X, then both $\overline d = d/(1+d)$ and
   $\overline d= \min(1,d)$ are also metrics and they are equivalent to d (i.e.., the identity
-  map $1:(X, d)\mapsto(X,\overline d)$ is a homeomorphism).
+  map $1:(X, d)\to(X,\overline d)$ is a homeomorphism).
 \end {problem}
-
 \motivation{} On page 3, both definitions of
 $\overline d$ provide a way given a metric $d$ to define an equivalent
 (induces the same topology) metric bounded above by $1$. Metric bounded
@@ -156,7 +157,7 @@ metric spaces $(M_1, d_1)$ and $(M_2, d_2)$
 \begin {displaymath}
   d(x,y) = \left\{
   \begin {array}{ll}
-    \overline d_i(x,y) & \textrm{if there is some }i \textrm{such that }x,y\in M_i\\
+    \overline d_i(x,y) & \textrm{if there is some }i\: \textrm{such that }x,y\in M_i\\
     1, & otherwise.
   \end {array}
   \right.
@@ -193,10 +194,62 @@ the triangle inequality for $d$, yields
   &=& \overline d(x,y) + \overline d(y, z) \quad (4 : \textrm{triangle inequality}).
 \end {eqnarray*}
 Therefore, $\overline d$ is a metric. We need to now show that the metrics $d$ and $\overline d$
-are equivalent. That is, they must induce the same topology. If the identity map 
-$I: (X,d)\mapsto (X, \overline d)$ is a homeomorphism, $I^-1 U = U$ and $IV =V$ are open for
-any open $U\subseteq(X, \overline d)$ and $V\subseteq(X, d)$.
+are equivalent. That is, they must induce the same topology. The identity map 
+$I: (X,d)\to (X, \overline d)$ is a homeomorphism if it and its inverse are
+continuous. That is, $I^-1 U = U$ and $IV =V$ are open for
+any open $U\subseteq(X, \overline d)$ and $V\subseteq(X, d)$ since $I$ and $I^{-1}$ are
+continuous.
 
+Let $U\subset(X,\overline d)$ and $V\subset(X, d)$ be open. Then $U$ and $V$
+can be expressed as an union of $\epsilon$-balls.
+Inverse image of each $\epsilon$-ball is the exactly same set but is assigned a different size
+\begin {eqnarray*}
+  \overline d(x, y) = \frac{d(x,y)}{1 + d(x,y)}\leq \epsilon
+  &\Leftrightarrow&
+  %d(x, y) (1 - \epsilon) \leq \epsilon \\
+  %&\Leftrightarrow&
+  d(x, y) \leq
+  \frac{\epsilon}{1-\epsilon}.
+\end {eqnarray*}
+That is, for $\epsilon\in [0, \infty)$,
+\begin {eqnarray*}
+  I^{-1}B_{\overline d}(x, \epsilon) = B_d\left(x, \:\epsilon/(1-\epsilon)\right)
+\end {eqnarray*}
+holds. Similarly for any $\epsilon > 0$
+\begin {eqnarray}
+  IB_d(x, \epsilon) = B_{\overline d}\left(x, \:\epsilon/(1+\epsilon)\right).
+\end {eqnarray}
+Thus images and inverse images of $\epsilon$-balls by $I$ get mapped into $\epsilon$-balls
+of different size. Since union of arbitrary family of open sets is open, $IV$ and
+$I^{-1}U$ must be open. $\quad\square$
 
+Let us now consider the case $\overline d=\min(1,d)$:
 
+Let $x, y, z\in X$. Since $d(x,y)\geq 0$, $\overline d(x, y) = \min (d(x,y), 1)\geq 0$ must also hold
+$( 1: $ non-negativity$)$. Let $\overline d(x,y) = 0$. Then clearly $d(x, y)=0$ and since $d$ is a
+metric $x=y$ must hold $(2: $ identity$)$. Symmetry follows directly from $d$ when $d(x,y)\leq 1$.
+Otherwise, $\overline d(y,x) = \overline d(x,y) = 1$.
+
+To prove triangle inequality, consider first the case when $d(x,z) < 1$.
+If $d(x, y) \geq 1$ or $d(y,z) \geq 1$, the triangle inequality is automatically satisfied.
+Suppose then that $d(x,y) < 1$ and $d(y,z) < 1$ hold.
+Then
+\begin {eqnarray}
+  \overline d(x, z) = d(x,z) \leq d(x,y) + d(y, z) = \overline d(x, y) + \overline d(y, z).
+\end {eqnarray}
+If $d(x,z) \geq 1$, then by triangle inequality for $d$, we must have 
+$1 \leq d(x,z) \leq d(x, y) + d(y, z) $ and we obtain
+\begin {eqnarray}
+  1 = \overline d(x,z) \leq \overline d(x, y) + \overline d(y, z).
+\end {eqnarray}
+Thus, $\overline d$ is a metric.
+
+Let $U\subseteq (X, d)$ be open, $x\in U$ and $I:X\to X$ the identity map.
+Since $U$ is open w.r.t. $d$, there is $\epsilon>0$ so that $B_d(x, \epsilon)\subseteq U$.
+Select $\epsilon':= max(\epsilon, 1/2)$. Then $B_{\overline d}(x, \epsilon')\subseteq U$.
+Thus $U$ is open in $(X, \overline d)$. If $V\subseteq (X, \overline d)$ is open and
+$y\in V$, then the exists $\epsilon>0$ such that $B_{\overline d}(x, \epsilon)\subseteq V$.
+Note that, if $\epsilon \geq 1$, $B_{\overline d}(x, \epsilon)=X$ holds. However,
+$B_d(x, \epsilon)\subseteq V$ follows always.  Therefore, the metrics induce the same topology.
+$\quad\square$
 \end {document}
