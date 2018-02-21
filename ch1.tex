@@ -250,6 +250,86 @@ Select $\epsilon':= max(\epsilon, 1/2)$. Then $B_{\overline d}(x, \epsilon')\sub
 Thus $U$ is open in $(X, \overline d)$. If $V\subseteq (X, \overline d)$ is open and
 $y\in V$, then the exists $\epsilon>0$ such that $B_{\overline d}(x, \epsilon)\subseteq V$.
 Note that, if $\epsilon \geq 1$, $B_{\overline d}(x, \epsilon)=X$ holds. However,
-$B_d(x, \epsilon)\subseteq V$ follows always.  Therefore, the metrics induce the same topology.
+$B_d(x, \epsilon)\subseteq V$ follows always.  Therefore, the both metrics induce the same
+topology.
 $\quad\square$
+
+\begin {problem}
+  If $(X_i, d_i)$ are metric spaces, for $i\in I$, with metrics $d_i < 1$, and
+  $X_i\cap X_j = \emptyset$ for $i\neq j$, then $(X, d)$ is a metric space, where
+  $X = \cup_iX_i$ and $d(x, y) = d_i(x, y)$ if $x, y\in X_i$ for some $i$, while
+  $d(x,y)=1$ otherwise. Each $X_i$ is an open subset of $X$, and $Y$ is homeomorphic
+  to $X$ if and only if $Y=\cup_iY_i$ where the $Y_i$ are disjoint open sets and
+  $Y_i$ is homeomorphic to $X_i$ for each $i$. The space $(X, d)$ (or any space
+  homeomorphic to it) is called the \textbf{disjoint union} of the spaces $X_i$.
+\end {problem}
+\motivation{}In problem 1, we showed that for any metric $d$, we can define an
+equivalent metric $\overline d$ limited to the interval $[0, 1)$. In this problem,
+we will show that given a set of disjoint metric spaces, we can define a metric
+and thus a metric topology for the union of the spaces using the construction of
+the previous problem.
+
+If the original metrics were used in the definition of the metric for union
+$(X, d)$, there would be no trivial way to select distances between disjoint
+subspaces: Since metric must be limited, one cannot simply select $d(x,y) = \infty$
+when $x\in X_i, y\in X_j$ and $i\neq j$. Furthermore, other definitions might
+lead to difficulties of neighborhoods of points intersecting other components.
+The above construction satisfies two important properties:
+\begin {itemize}
+\item The topology of each component remains the same.
+\item The distances within components are smaller than between components.
+\end {itemize}
+\begin {solution}\end{solution}
+Let us first show that $d:X\times X\to[0, 1]$ is a metric:
+
+Since each $d_i\geq 0$ and for point pairs with points from two different
+components $d(x,y)=1$, we have $d\geq 0$ $(1:$ non-negativity$)$.
+Let $x, y\in X$ so that $d(x,y)=0$. Then $x,y\in X_i$ for some $i$ and we
+have $d_i(x,y)=0$. Since $d_i$ is a metric, $x=y$ must hold $(2:$ identity$)$.
+Let $x,y\in X$. If $x$ and $y$ are members of different components,
+$d(y,x)=d(x,y)=1$ must hold. Suppose $x, y\in X_i$ for some $i$. Then, since
+$d_i$ is a metric,
+\begin {eqnarray*}
+  d(y,x) = d_i(y,x) = d_i(x,y) = d(x, y)
+\end {eqnarray*}
+must hold. $(3:$ symmetry$)$. Let $x,y,z\in X$. If all belong to the same
+component $i$, triangle inequality follows from properties of metric $d_i$.
+If all three belong to different components,
+\begin {eqnarray*}
+  d(x, z) = 1 \leq 2 = d(x, y) + d(y, z)
+\end {eqnarray*}
+and triangle inequality clearly holds.
+Suppose then that $x,y\in X_i$ and $z\in X_j$, where $i\neq j$.
+Then $d(x, z) \leq 1$ and $d(y, z)\leq 1$. Since also $d(x,y)\geq 0$,
+triangle inequality follows. Thus, $d$ is a metric.
+
+Each $X_i$ is open since 
+\begin {eqnarray*}
+  X_i = \bigcup_{x\in X_i}B_d(x, 1).
+\end {eqnarray*}
+and $(X_i, d_i)$ is topological space. Note that, each $X_i$ must be also
+closed since $\cup_{j\neq i} X_j$ is open. Thus $X_i$ are the components of $X$.
+
+
+Let us show that $Y$ is homeomorphic with $X$
+if and only if $Y$ is disjoint union of open sets $Y_i$ homeomorphic with $X_i$
+for each $i$: Suppose first that $f:X\to Y$ is homeomorphism.
+Since $f^{-1}$ is continuous, the sets $X_i$ are disjoint and $f$ is bijection,
+the sets $Y_i:= f(X_i)$ must be open and disjoint. Moreover restriction of $f$
+to $X_i$ $f_i: X_i \to Y_i$ must be bijection. Topology for $Y_i$ is induced
+by $f_i$. 
+
+Suppose now that $Y$ is disjoint union of open sets $Y_i$ homeomorphic with $X_i$
+for each $i$. Define
+\begin {eqnarray*}
+  f : X\to Y : \left.f\right|_{X_i} = Y_i.
+\end {eqnarray*}
+Then $f$ is clearly a bijection. Suppose $U\subseteq Y$ is open. Then $U$ can be
+written as union of open sets limited to individual $Y_i$. Inverse image of each
+such set is open in $X_i$. Thus, also inverse image of $U$ must be open and thus
+$f$ is continuous. Same argument can be repeated for $f^{-1}$. Thus, $f$ must be
+homeomorphism.
+$\quad\square$
+
+
 \end {document}
