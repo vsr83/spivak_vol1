@@ -55,6 +55,7 @@
 \thispagestyle{fancy}
 
 \newtheorem {problem} {Problem}
+\newtheorem {theorem} {Theorem}
 \newtheorem {definition} {Definition}
 
 \newcommand{\vu}[1]
@@ -264,7 +265,7 @@ $\quad\square$
   homeomorphic to it) is called the \textbf{disjoint union} of the spaces $X_i$.
 \end {problem}
 \motivation{}In problem 1, we showed that for any metric $d$, we can define an
-equivalent metric $\overline d$ limited to the interval $[0, 1)$. In this problem,
+equivalent metric $\overline d$ with range limited to the interval $[0, 1)$. In this problem,
 we will show that given a set of disjoint metric spaces, we can define a metric
 and thus a metric topology for the union of the spaces using the construction of
 the previous problem.
@@ -316,7 +317,7 @@ if and only if $Y$ is disjoint union of open sets $Y_i$ homeomorphic with $X_i$
 for each $i$: Suppose first that $f:X\to Y$ is homeomorphism.
 Since $f^{-1}$ is continuous, the sets $X_i$ are disjoint and $f$ is bijection,
 the sets $Y_i:= f(X_i)$ must be open and disjoint. Moreover restriction of $f$
-to $X_i$ $f_i: X_i \to Y_i$ must be bijection. Topology for $Y_i$ is induced
+to $X_i$ $f_i: X_i \to Y_i$ must be a bijection. Topology for $Y_i$ is induced
 by $f_i$. 
 
 Suppose now that $Y$ is disjoint union of open sets $Y_i$ homeomorphic with $X_i$
@@ -329,7 +330,102 @@ written as union of open sets limited to individual $Y_i$. Inverse image of each
 such set is open in $X_i$. Thus, also inverse image of $U$ must be open and thus
 $f$ is continuous. Same argument can be repeated for $f^{-1}$. Thus, $f$ must be
 homeomorphism.
-$\quad\square$
+$\quad\square\\$
+\hrule
+\begin {definition}
+  \label{def:manifold}
+  A topological space $M$ is \textbf{locally Euclidean} if for each $x\in M$ there is
+  a neighborhood $U$ of x and some integer $n\geq 0$ so that $U$ is homeomorphic
+  to $\mathbb{R}^n$. A \textbf{topological manifold} is a metric space $M$ that is locally
+  Euclidean.
+\end {definition}
+The rather surprising definition as a metric space is made more clear by the
+following two theorems.
+\begin {theorem}
+  If $X$ is connected locally compact metric space, then $X$ is $\sigma$-compact.
+\end {theorem}
+\begin {theorem}
+  \label{th:second_countable}
+  For any locally Euclidean Hausdorff space, the following conditions are equivalent:
+  \begin {enumerate}
+  \item Each component of $M$ is $\sigma$-compact,
+  \item Each component of $M$ is second contable (has a countable base for the topology).
+  \item $M$ is metrizable.
+  \item $M$ is paracompact.
+  \end {enumerate}  
+\end {theorem}
+Since every metric space Hausdorff, by Definition \ref{def:manifold}
+and Theorem \ref{th:second_countable}, any manifold must be second-countable. Thus, we
+obtain a link to a more common definition of topological manifolds as second-countable
+and locally Euclidean Hausdorff spaces. 
 
+\begin {definition}
+  A topological space $X$ is said to be \textbf{locally compact at $x$} if there is some compact
+  subspace $C$ of $X$ that contains neighborhood of $x$. If $X$ is compact at each
+  $x\in X$, $X$ is \textbf{locally compact}.
+\end {definition}
 
+\begin {definition}
+  In topological space $X$ a \textbf{path between $x\in X$ and $y\in X$} is a continuous map
+  $f:[a,b]\to X$ so that $f(a)=x$ and $f(b)=y$ hold. Topological space $X$ is \textbf{path connected}
+  if there is a path between every pair of points of $X$.
+  A topological space $X$ is said to be \textbf{locally path connected at $x$} if every
+  neighborhood $U$ of $x$ contains a path conncted neighborhood $V$ of $x$.
+  An \textbf{arc} is an injective path and $X$ is \textbf{arcwise connected} if each
+  pair of points can be connected by an arc.
+\end {definition}
+\hrule
+\begin {problem}
+  $\:$
+  \begin {enumerate}
+  \item Every manifold is locally compact.
+  \item Every manifold is locally pathwise connected, and a connected manifold
+    pathwise connected.
+  \item A connected manifold is arcwise connected.
+  \end {enumerate}
+\end {problem}
+\begin {solution}\end {solution} Let $X$ be a manifold and let us first show that
+$X$ is locally compact.
+
+Let $x\in X$. Since $X$ is locally Euclidean, there exists a neighborhood $U$ of
+$x$ and a homeomorphism $f:U\to\mathbb{R}^n$. Since $\mathbb{R}^n$ is locally
+compact, there exists compact subspace $V\subseteq\mathbb{R}^n$, which contains
+a neighborhood $W$ of $f(x)$. Since $f$ is continuous, $f^{-1}(V)$ is a compact
+subspace of $X$ and contains an neighborhood $f^{-1}(W)$ of $x$. Thus $X$ is
+locally compact. $\quad\square$
+
+Let us now show that $X$ is locally path-connected.
+Let $x\in X$. Since $X$ is locally Euclidean, there exists a neighborhood $U$ of
+$x$ and a homeomorphism $f:U\to\mathbb{R}^n$. Since $\mathbb{R}^n$ is locally
+path-connected, and $f(U)$ is neighborhood of $f(x)$, there is path connected
+neighborhood $W$ contained in $f(U)$. Since $f^{-1}$ is continuous,
+$v:= f^{-1}(W)\subseteq U$ is path connected neighborhood of $x$.
+Thus, $X$ is locally path connected. $\quad\square$
+
+Suppose now that $X$ is a connected manifold and let us show that $X$ is
+pathwise connected: Let $x_0\in X$ and define
+\begin {eqnarray}
+  V := \{x\in X: \exists\: \textrm{path } x_0\to x\}
+\end {eqnarray}
+If $V$ is both open and closed, it must be equal to $X$ since $X$ has only one
+component.
+Let $x\in V$. Since $X$ is open and locally path-connected, there must be a neighborhood
+of $x$ in $X$, which contains a path connected neighborhood $W$ of $x$. Since there
+exists a path from $x_0$ to $x$ and $W$ is path connected, there must also exist a
+path from $x_0$ to every $y\in W$. Thus, $V$ is open.
+
+Let $x\in X\setminus V$. Then, there is no path $x_0\to x$.
+Suppose every neighborhood of $x$ intersects with $V$. Then, since $X$ is locally
+connected there must be path from $x$ to a point of $V$. This implies that $x\in V$,
+which is a contradiction. Thus, there must an neighborhood of $x$ contained in
+$X\setminus V$. Thereforce, $X\setminus V$ must be open and $V$ closed. $\quad\square$
+
+Let $X$ be connected manifold. Let us show that $X$ is arcwise connected.
+The proof for local path connectedness works just as well for arcwise connectedness
+since every $\epsilon$-ball of $\mathbb{R}^n$ is clearly arcwise connected.
+Any $x\in X$ has a neighborhood in $U\subseteq X$ and a homeomorphismm
+$f:U\to\mathbb{R}^n$.
+Inverse image of $\epsilon$-ball neighborhood of $f(x)$ is arcwise connected
+neighborhood contained in the above neighborhood. Thus the proof for path
+connectedness can be easily modified for arcwise connectedness. $\quad\square$
 \end {document}
