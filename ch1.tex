@@ -17,10 +17,10 @@
 \usepackage {psfrag}
 \usepackage {listings}
 \usepackage {eso-pic}
-
 %\usepackage[urw-garamond]{mathdesign}
 \usepackage[small,bf]{caption}
-
+\usepackage{enumitem}
+\usepackage{stix}
 \newcommand{\BackgroundPic}{
 %  \put(0,0){
 %    \parbox[b][\paperheight]{\paperwidth}{
@@ -308,9 +308,9 @@ Each $X_i$ is open since
 \begin {eqnarray*}
   X_i = \bigcup_{x\in X_i}B_d(x, 1).
 \end {eqnarray*}
-and $(X_i, d_i)$ is topological space. Note that, each $X_i$ must be also
-closed since $\cup_{j\neq i} X_j$ is open. Thus $X_i$ are the components of $X$.
-
+and $(X_i, d_i)$ is topological space.Note that, each $X_i$ must be also
+closed since $\cup_{j\neq i} X_j$ is open.
+%Thus $X_i$ are the components of $X$.
 
 Let us show that $Y$ is homeomorphic with $X$
 if and only if $Y$ is disjoint union of open sets $Y_i$ homeomorphic with $X_i$
@@ -428,4 +428,84 @@ $f:U\to\mathbb{R}^n$.
 Inverse image of $\epsilon$-ball neighborhood of $f(x)$ is arcwise connected
 neighborhood contained in the above neighborhood. Thus the proof for path
 connectedness can be easily modified for arcwise connectedness. $\quad\square$
+
+\begin {problem}
+  A space $X$ is called locally connected if for each $x\in X$ it is the case that
+  every neighborhood of $x$ contains a connected neighborhood.
+
+  \begin {enumerate}[label=(\alph*)]
+  \item Connectedness does not imply local connectedness.
+  \item An open subset of a locally connected space is locally connected.
+  \item $X$ is locally connected if and only if components of open sets are open,
+    so every neighborhood of a point in a locally connected space contains an
+    open connected neighborhood.
+  \item A locally connected space is homeomorphic to the disjoint union of its
+    components.
+  \item Every manifold is locally connected, and consequently homeomorphic to the
+    disjoint union of its components, which are open submanifolds.
+  \end {enumerate}
+\end {problem}
+\begin {solution}\end {solution}\textbf{(a)}
+Consider the \emph{Topologist's sine curve:}
+\begin {eqnarray*}
+  M = \{
+  (x, \sin 1/x) : x\in (0, 1]\}
+  \subseteq\mathbb{R}^2
+\end {eqnarray*}
+with the closure
+\begin {eqnarray*}
+  \overline M = \{
+  (x, \sin 1/x) : x\in (0, 1]\} \cup \{(0,y): y\in[0,1]\}
+  \subseteq\mathbb{R}^2
+\end {eqnarray*}
+and subspace topology inherited from $\mathbb{R}^2$
+\begin {eqnarray*}
+  \tau = \{U\cap M : U\subseteq\:\mathbb{R}^2 \:\textrm{open}\}.
+\end {eqnarray*}
+Since $M$ is the image of an connected set by a continuous function, it is
+connected. Moreover, closure of an connected set is connected.
+
+Select $U:= B_d((0,0), \epsilon)$, where $\epsilon < 1$.
+Every neighborhood $B_d((0,0), \epsilon)\cap M$ contains infinite number
+of components of $M$. $\quad\square$
+
+\textbf{(b)} Let $M$ be locally connected and $U\subseteq M$ be open.
+Now let $x\in U$, and $V\subseteq U$ open neighborhood of $x$.
+Since $U\cap V$ is neighborhood of $x$ in $M$, there is connected neighborhood
+$W\subseteq U\cap V$ of $x$. $\quad\square$
+
+\textbf{(c)} Let $M$ be locally connected and $U\subseteq M$ be open.
+Note that now, $U$ may consist of arbitrary number of components.
+Let $C\subseteq U$ be a component of $U$ and $x\in C$. Since $M$ is locally connected,
+there is a connected neighborhood $V\subseteq M$ of $x$. Since $C$ is
+connected and contains $x$, $V\subseteq C$ must hold. Since $x\in C$
+is arbitrary, $C$ must be open.
+
+Suppose now that every component of each open $U\subseteq M$ is open.
+Let $x\in M$ and $U\subseteq M$ be a neighborhood of $x$.
+Let $C$ be the component of $U$ that contains $x\in M$. Then $C$ is
+open and thus a connected neighborhood of $x$. Thus, $M$ is locally
+connected. $\quad\square$
+
+\textbf{(d)} Let $M$ be locally connected. 
+Let $C_\alpha : \alpha\in I$ be the family of all components of $M$ and
+$f_\alpha: C_\alpha \to M$ canonical injections of $C_\alpha$ to $M$.
+Then \textbf{disjoint union topology} is the topology, in which
+$U\subseteq\bigcup_\alpha C_\alpha$ is open if and only if $f_\alpha^{-1}(U)$ is open
+for all $\alpha\in I$.
+Define
+\begin {eqnarray*}
+  f: \bigcup_{\alpha\in I}C_\alpha \to M : \left.f\right|_{C_\alpha} = f_\alpha.
+\end {eqnarray*}
+Then since $M = \bigcup_\alpha C_\alpha$, $f$ must be a bijection.
+Since $M$ is open and locally connected, it follows from $(c)$ that every component
+$C_\alpha\subseteq M$ must be open. 
+
+Now if $U\subseteq M$ is open, it can be written as a disjoint union of connected
+open sets and $f_\alpha^{-1}(U)$ is either empty or an non-empty open set. Thus,
+$U$ is open in $\bigcup_\alpha C_\alpha$. If $U$ is open in $\bigcup_\alpha C_\alpha$,
+$f_\alpha^{-1}(U)$ is open for all $\alpha\in I$. Since $U$ is an union of open sets
+in $M$, $U$ must be open in $M$. $\quad\square$
+
+\textbf{(e)} Follows from $(b),(c),(d),(e)$. $\quad\square$
 \end {document}
