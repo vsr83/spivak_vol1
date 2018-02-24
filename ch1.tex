@@ -21,6 +21,8 @@
 \usepackage[small,bf]{caption}
 \usepackage{enumitem}
 \usepackage{stix}
+\usepackage{lipsum}
+
 \newcommand{\BackgroundPic}{
 %  \put(0,0){
 %    \parbox[b][\paperheight]{\paperwidth}{
@@ -146,7 +148,7 @@ of all unions of elements of $\mathcal{B}$.
 \hrule
 
 \begin {problem}
-  Show that if d is a metric on X, then both $\overline d = d/(1+d)$ and
+  Show that if $d$ is a metric on $X$, then both $\overline d = d/(1+d)$ and
   $\overline d= \min(1,d)$ are also metrics and they are equivalent to d (i.e.., the identity
   map $1:(X, d)\to(X,\overline d)$ is a homeomorphism).
 \end {problem}
@@ -308,7 +310,7 @@ Each $X_i$ is open since
 \begin {eqnarray*}
   X_i = \bigcup_{x\in X_i}B_d(x, 1).
 \end {eqnarray*}
-and $(X_i, d_i)$ is topological space.Note that, each $X_i$ must be also
+and $(X_i, d_i)$ is topological space. Note that, each $X_i$ must be also
 closed since $\cup_{j\neq i} X_j$ is open.
 %Thus $X_i$ are the components of $X$.
 
@@ -375,6 +377,8 @@ and locally Euclidean Hausdorff spaces.
   pair of points can be connected by an arc.
 \end {definition}
 \hrule
+$\\$
+
 \begin {problem}
   $\:$
   \begin {enumerate}
@@ -508,4 +512,52 @@ $f_\alpha^{-1}(U)$ is open for all $\alpha\in I$. Since $U$ is an union of open 
 in $M$, $U$ must be open in $M$. $\quad\square$
 
 \textbf{(e)} Follows from $(b),(c),(d),(e)$. $\quad\square$
+\newpage
+
+\begin {theorem} (Invariance of Domain)
+  If $U\subseteq\mathbb{R}^n$ is open and $f:U\to\mathbb{R}^n$ is one-to-one and
+  continuous, then $f(U)\subseteq\mathbb{R}^n$ is open.
+\end {theorem}
+
+\begin {problem}
+  $\:$
+  
+  \begin {enumerate}[label=(\alph*)]
+  \item The neighborhood $U$ in our definition of a manifold is always open.
+  \item The integer $n$ in our definition is unique for each $x\in M$.
+  \end {enumerate}  
+\end {problem}
+\begin {solution}\end{solution}
+\textbf{(a)} The following argument is incorrect:
+\begin {quote}
+Let $U\subseteq M$ and $f:U\to\mathbb{R}^n$ homeomorphism. Let
+us show that $U$ is always open. Since $f$ is continuous and $\mathbb{R}^n$
+is open $f^{-1}(\mathbb{R}^n) = U$ must be open.
+\end {quote}
+\textbf{It follows that $U$
+is open in $U$ but it does not necessarily follow that $U$ is open in $M$!}
+
+Before accepting conclusion of this theorem, Spivak considers \textbf{neighborhood}
+$U\subseteq M$ of $x\in M$ to be a set, which contains an open subset $V\subset U$
+that contains $x\in M$.
+
+Let $U\subseteq M$ neighborhood of $x\in M$.
+There is a homeomorphism $f : U \to \mathbb{R}^n$.
+Since $M$ is a locally Euclidean, each point $x\in U$ has also an open neighborhood
+and each open neighborhood contains some $\epsilon$-ball $V_x$ of $x$, which is trivially
+homeomorphic with $\mathbb{R}^n$ via some $f_x:V_x\to\mathbb{R}^n$.
+Each $V_x\cap U$ is open in subspace topology of $U$ but not necessarily in $M$.
+
+Since $f$ is homeomorphism, $f(V_x\cap U)$ is open in $\mathbb{R}^n$ and contains $f(x)$.
+There must be a $B:= B_d(f(x), \epsilon)$ contained in $f(V_x\cap U)$.
+Now $\left.f_x\circ f^{-1}\right|_B:B\to\mathbb{R}^n$ must be an injection and continuous.
+Therefore, according to Invariance of Domain, $f_x\circ f^{-1}(B)\subseteq\mathbb{R}^n$
+must be open. Then also $f_x^{-1}(f_x(f^{-1}(V_x))) = f^{-1}(B)\subseteq V_x\cap U$
+must be open subset of $M$ containing $x$. Since $x\in U$ was arbitrary, $U$ must
+be open. $\quad\square$
+
+\textbf{(b)} Let $x\in M$ and suppose there is $B(x, \epsilon)$ for some $\epsilon > 0$
+homeomorphic with both $\mathbb{R}^n$ and $\mathbb{R}^m$, where $m\neq n$. Then it follows
+that $\mathbb{R}^n$ and $\mathbb{R}^m$ are homeomorphic, which is a contradiction.
+$\quad\square$
 \end {document}
